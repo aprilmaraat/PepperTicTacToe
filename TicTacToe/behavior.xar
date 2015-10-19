@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3">
+    <Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0">
+        <bitmap>media/images/box/root.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Input name="TicTacToe/UserSymbol" type="0" type_size="1" nature="4" stm_value_name="TicTacToe/UserSymbol" inner="1" tooltip="TicTacToe/UserSymbol desc" id="4" />
+        <Input name="TicTacToe/UserFinishTurn" type="0" type_size="1" nature="4" stm_value_name="TicTacToe/UserFinishTurn" inner="1" tooltip="TicTacToe/UserFinishTurn desc" id="5" />
+        <Input name="TicTacToe/PepperPlot" type="0" type_size="1" nature="4" stm_value_name="TicTacToe/PepperPlot" inner="1" tooltip="TicTacToe/PepperPlot desc" id="6" />
+        <Input name="TicTacToe/Winner" type="0" type_size="1" nature="4" stm_value_name="TicTacToe/Winner" inner="1" tooltip="TicTacToe/Winner desc" id="7" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="8" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="Start Behavior" id="2" localization="8" tooltip="" x="230" y="208">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.behavior = ALProxy("ALBehaviorManager")
+
+    def onInput_onDetect(self):
+        self.behavior.startBehavior("Main")
+        self.onStopped()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onDetect" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+                        </Box>
+                        <Box name="Show Web" id="10" localization="8" tooltip="" x="98" y="12">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.tabletService = self.session().service("ALTabletService")
+
+    def onInput_onStart(self):
+        self.tabletService.loadApplication(".lastUploadedChoregrapheBehavior/GameTable.html")
+        self.tabletService.showWebview()
+        self.onStopped()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                        </Box>
+                        <Box name="Pass User Symbol" id="1" localization="8" tooltip="" x="230" y="11">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.memory = ALProxy("ALMemory");
+        self.tts = ALProxy("ALTextToSpeech");
+
+    def onInput_onStart(self, number):
+        parameter = "";
+        if number == 1:
+            parameter = "O";
+        else:
+            parameter = "X"
+        self.memory.raiseEvent("TicTacToe/UserSymbol", parameter);
+        self.onStopped(parameter);]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="2" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="3" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                        </Box>
+                        <Box name="Wait (2 second)" id="8" localization="8" tooltip="" x="550" y="60">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self);
+
+    def onInput_onStart(self):
+        import qi
+        qi.async(self.stop, delay=int(2 * 1000 * 1000))
+
+    def stop(self):
+        self.onStopped();]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+                        </Box>
+                        <Box name="Pepper Turn" id="3" localization="8" tooltip="" x="635" y="188">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onInput_onStart(self):
+        import random
+        pepperNumber = random.randint(0, 8)
+        self.onStopped(pepperNumber)]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="2" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                        </Box>
+                        <Box name="Rules" id="4" localization="8" tooltip="" x="413" y="41">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.tts = ALProxy("ALTextToSpeech")
+        self.memory = ALProxy("ALMemory");
+        self.listBoard = [" ", " ", " ",
+                         " ", " ", " ",
+                         " ", " ", " "]
+        self.userSymbol = "";
+        self.pepperSymbol = "";
+
+    def onInput_onStart(self, symbol): # Set symbol for players
+        self.userSymbol = symbol;
+        if self.userSymbol == "X":
+            self.pepperSymbol = "O";
+        else:
+            self.pepperSymbol = "X";
+
+    def onInput_Check(self, number): # Check position if available | Pepper's turn
+        if self.listBoard[number] != "X" and self.listBoard[number] != "O":
+            self.listBoard[number] = self.pepperSymbol;
+            self.memory.raiseEvent("TicTacToe/PepperPlot", number);
+            if self.CheckWinner(self.pepperSymbol) == True:
+                self.tts.say("I won!")
+                self.memory.raiseEvent("TicTacToe/Winner", self.PassWinner(self.pepperSymbol));
+                self.End()
+        else:
+            self.Return();
+
+    def onInput_CheckUser(self, number): # Check position if available | User's turn
+        n = int(number)
+        if self.listBoard[n] != "X" and self.listBoard[n] != "O":
+            self.listBoard[n] = self.userSymbol;
+            if self.CheckWinner(self.userSymbol) == True:
+                self.tts.say("You won!")
+                self.memory.raiseEvent("TicTacToe/Winner", self.PassWinner(self.userSymbol));
+                self.End()
+            else:
+                self.Start();
+
+    def CheckWinner(self, symbol): # Check winner
+        return ((self.listBoard[0] == symbol and self.listBoard[1] == symbol and self.listBoard[2] == symbol) or  # across the top
+            (self.listBoard[3] == symbol and self.listBoard[4] == symbol and self.listBoard[5] == symbol) or  # across the middle
+            (self.listBoard[6] == symbol and self.listBoard[7] == symbol and self.listBoard[8] == symbol) or  # across the bottom
+            (self.listBoard[0] == symbol and self.listBoard[3] == symbol and self.listBoard[6] == symbol) or  # down the left side
+            (self.listBoard[1] == symbol and self.listBoard[4] == symbol and self.listBoard[7] == symbol) or  # down the middle
+            (self.listBoard[2] == symbol and self.listBoard[5] == symbol and self.listBoard[8] == symbol) or  # down the right side
+            (self.listBoard[0] == symbol and self.listBoard[4] == symbol and self.listBoard[8] == symbol) or  # diagonal
+            (self.listBoard[2] == symbol and self.listBoard[4] == symbol and self.listBoard[6] == symbol))  # diagonal
+
+    def PassWinner(self, symbol):
+        if (self.listBoard[0] == symbol and self.listBoard[1] == symbol and self.listBoard[2] == symbol) == True:
+            return "HT" # (H)orizontal (T)op
+        elif (self.listBoard[3] == symbol and self.listBoard[4] == symbol and self.listBoard[5] == symbol) == True:
+            return "HM" # (H)orizontal (M)iddle
+        elif (self.listBoard[6] == symbol and self.listBoard[7] == symbol and self.listBoard[8] == symbol) == True:
+            return "HB" # (H)orizontal (B)ottom
+        elif (self.listBoard[0] == symbol and self.listBoard[3] == symbol and self.listBoard[6] == symbol) == True:
+            return "VL" # (V)ertical (L)eft
+        elif (self.listBoard[1] == symbol and self.listBoard[4] == symbol and self.listBoard[7] == symbol) == True:
+            return "VM" # (V)ertical (M)iddle
+        elif (self.listBoard[2] == symbol and self.listBoard[5] == symbol and self.listBoard[8] == symbol) == True:
+            return "VR" # (V)ertical (R)ight
+        elif (self.listBoard[0] == symbol and self.listBoard[4] == symbol and self.listBoard[8] == symbol) == True:
+            return "D1" # (D)iagonal \
+        elif () == True:
+            return "D2" # (D)iagonal /]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="3" type_size="1" nature="1" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="Check" type="2" type_size="1" nature="1" inner="0" tooltip="" id="3" />
+                            <Input name="CheckUser" type="3" type_size="1" nature="1" inner="0" tooltip="" id="4" />
+                            <Output name="Return" type="1" type_size="1" nature="2" inner="0" tooltip="" id="5" />
+                            <Output name="Start" type="1" type_size="1" nature="2" inner="0" tooltip="" id="6" />
+                            <Output name="End" type="1" type_size="1" nature="1" inner="0" tooltip="" id="7" />
+                        </Box>
+                        <Box name="Show Web (1)" id="5" localization="8" tooltip="" x="91" y="150">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.tabletService = self.session().service("ALTabletService")
+
+    def onInput_onStart(self):
+        self.tabletService.loadApplication(".lastUploadedChoregrapheBehavior/index.html")
+        self.tabletService.showWebview()
+        self.onStopped()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                        </Box>
+                        <Link inputowner="10" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="4" indexofinput="3" outputowner="3" indexofoutput="4" />
+                        <Link inputowner="4" indexofinput="2" outputowner="1" indexofoutput="4" />
+                        <Link inputowner="4" indexofinput="4" outputowner="0" indexofoutput="5" />
+                        <Link inputowner="8" indexofinput="2" outputowner="4" indexofoutput="5" />
+                        <Link inputowner="8" indexofinput="2" outputowner="4" indexofoutput="6" />
+                        <Link inputowner="3" indexofinput="2" outputowner="8" indexofoutput="3" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheProject>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- title and meta -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Tic Tac Toe</title>
+
+  <!-- css -->
+  <style>
+   body{ 
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFB2;
+   }
+    #draggable {
+      width: 100%;
+      height: 400px;
+      margin-top: 200px;  
+      margin-left: auto;
+
+    }
+
+    .dashboard {
+      -webkit-perspective: 1000;
+      perspective: 1000;
+    }
+    #game{
+      width:100%;
+      font-size: 150px;
+      font-family: sans-serif;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      color:black;
+    }
+
+    .dashboard {
+      width: 33%;
+      height: 100%;
+      margin-left: 5px;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;  
+      -webkit-transition: all 1.0s linear;
+      transition: all 1.0s linear;
+      float: left;
+      font-family: Avenir;
+      font-weight: bold;
+      font-size:300px;
+      color: black;
+    }
+
+    .loadable {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    #a1{
+      -webkit-transform: rotateY(-180deg);
+      transform: rotateY(-180deg);
+      -webkit-animation: mymoveback 5s infinite;  
+      animation: mymoveback 5s infinite;  
+      -webkit-animation-delay: 15s; /* Chrome, Safari, Opera */
+      animation-delay: 15s;
+       display: block;
+      box-sizing: border-box;
+      padding: 10px;
+      color: white;
+       background-color: #99CCFF;
+       text-align: center;
+       vertical-align: middle;
+       
+    }
+    #b1 {
+      display: block;
+      box-sizing: border-box;
+      padding: 10px;
+      color: white;
+       background-color: #99CCFF;
+       text-align: center;
+       vertical-align: middle;
+      -webkit-animation: mymove 5s infinite;
+      animation: mymove 5s infinite;
+      -webkit-animation-delay: 15s; /* Chrome, Safari, Opera */
+      animation-delay: 15s;
+    }
+    #a2{
+      -webkit-transform: rotateY(-180deg);
+      transform: rotateY(-180deg);
+      -webkit-animation: mymoveback 10s infinite;  
+      animation: mymoveback 10s infinite;  
+      -webkit-animation-delay: 10s; /* Chrome, Safari, Opera */
+      animation-delay: 10s; 
+       display: block;
+      box-sizing: border-box;
+      padding: 10px;
+      color: white;
+       background-color: #FF6666;
+       text-align: center;
+       vertical-align: middle;
+    }
+    #b2 {
+      display: block;
+      box-sizing: border-box;
+      padding: 10px;
+      color: white;
+       background-color: #FF6666;
+       text-align: center;
+       vertical-align: middle;
+
+      -webkit-animation: mymove 10s infinite;
+      animation: mymove 10s infinite;
+      -webkit-animation-delay: 10s; /* Chrome, Safari, Opera */
+      animation-delay: 10s;
+    }
+    #a3{
+      -webkit-transform: rotateY(-180deg);
+      transform: rotateY(-180deg);
+      -webkit-animation: mymoveback 15s infinite;  
+      animation: mymoveback 15s infinite;  
+      -webkit-animation-delay: 5s; /* Chrome, Safari, Opera */
+      animation-delay: 5s;
+       display: block;
+      box-sizing: border-box;
+      padding: 10px;
+      color: white;
+       background-color: #99CCFF;
+       text-align: center;
+       vertical-align: middle;
+    }
+    #b3 {
+      display: block;
+      box-sizing: border-box;
+      padding: 10px;
+      color: white;
+       background-color: #99CCFF;
+       text-align: center;
+       vertical-align: middle;
+
+      -webkit-animation: mymove 15s infinite;
+      animation: mymove 15s infinite;
+      -webkit-animation-delay: 5s; /* Chrome, Safari, Opera */
+      animation-delay: 5s;
+    }
+    /* Chrome, Safari, Opera */
+    @-webkit-keyframes mymove {
+      40% {
+        -webkit-transform: rotateY(0deg);
+      }
+      50% {
+        -webkit-transform: rotateY(180deg);
+      }
+      90% {
+        -webkit-transform: rotateY(180deg);
+      }
+      100% {
+        -webkit-transform: rotateY(0deg);
+      }
+    }
+    @-webkit-keyframes mymoveback {
+      40% {
+        -webkit-transform: rotateY(-180deg);
+      }
+      50% {
+        -webkit-transform: rotateY(0deg);
+      }
+      90% {
+        -webkit-transform: rotateY(0deg);
+      }
+      100% {
+        -webkit-transform: rotateY(-180deg);
+      }
+    }
+
+    @keyframes mymove {
+      40% {
+        transform: rotateY(0deg);
+      }
+      50% {
+        transform: rotateY(180deg);
+      }
+      90% {
+        transform: rotateY(180deg);
+      }
+      100% {
+        transform: rotateY(0deg);
+      }
+    }
+    @keyframes mymoveback {
+      40% {
+        transform: rotateY(-180deg);
+      }
+      50% {
+        transform: rotateY(0deg);
+      }
+      90% {
+        transform: rotateY(0deg);
+      }
+      100% {
+        transform: rotateY(-180deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="draggable">
+    <div id="dashboard1" class="shadow dashboard">
+      <div class="widget-inner loadable" id="a1">
+        Tic
+      </div>
+      <div class="widget-inner loadable" id="b1">
+        Tic
+      </div>
+    </div>
+    <div id="dashboard2" class="shadow dashboard">
+      <div class="widget-inner loadable" id="a2">
+        Tac
+      </div>
+      <div class="widget-inner loadable" id="b2">
+        Tac
+      </div>
+    </div>
+    <div id="dashboard3" class="shadow dashboard">
+      <div class="widget-inner loadable" id="a3">
+        Toe
+      </div>
+      <div class="widget-inner loadable" id="b3">
+        Toe
+      </div>
+    </div>
+  </div>
+  <div id="game">Game</div>
+</body>
+</html>
