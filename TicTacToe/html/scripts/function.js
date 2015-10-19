@@ -6,7 +6,7 @@ $(document).ready(function(){
 }); // end $(document).ready(function(){
 
 function assignSymbol(value){
-	userSymbol = value;
+	//userSymbol = value;
 
 	//----Junry----Send signal to the choregraphe of the user symbol choose---//
 	session.service("ALMemory").done(function (ALMemory) {
@@ -33,6 +33,9 @@ function exit(){
 function changePage(page) {
 	window.top.location.href= page; //change the frame
 }
+function userSymbol(symbol){
+	userSymbol = symbol;
+}
 
 function pepperPlot(value){
 	var pepperSymbol = "";
@@ -57,9 +60,9 @@ function showWinner(value){
 
 function startSubscribe() {
 	session.service("ALMemory").done(function (ALMemory) {
-		// ALMemory.subscriber("TicTacToe/UserSymbol").done(function(subscriber) {
-		// 	subscriber.signal.connect(assignSymbol);
-		// });
+		ALMemory.subscriber("TicTacToe/userSymbol").done(function(subscriber) {
+			subscriber.signal.connect(userSymbol);
+		});
 		ALMemory.subscriber("TicTacToe/PepperPlot").done(function(subscriber) {
 			subscriber.signal.connect(pepperPlot);
 		});

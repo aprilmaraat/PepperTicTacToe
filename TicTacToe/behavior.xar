@@ -60,7 +60,7 @@
                             <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
                             <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
                         </Box>
-                        <Box name="Pass User Symbol" id="1" localization="8" tooltip="" x="330" y="132">
+                        <Box name="Pass User Symbol" id="1" localization="8" tooltip="" x="219" y="160">
                             <bitmap>media/images/box/box-python-script.png</bitmap>
                             <script language="4">
                                 <content>
@@ -141,6 +141,7 @@
 
     def onInput_onStart(self, symbol): # Set symbol for players
         self.userSymbol = symbol;
+        self.memory.raiseEvent("TicTacToe/userSymbol", self.userSymbol);
         if self.userSymbol == "X":
             self.pepperSymbol = "O";
         else:
