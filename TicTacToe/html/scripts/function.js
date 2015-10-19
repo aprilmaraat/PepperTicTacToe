@@ -29,6 +29,11 @@ function exit(){
 	});
 }
 
+//----Junry----Function to change the page---//
+function changePage(page) {
+	window.top.location.href= page; //change the frame
+}
+
 function pepperPlot(value){
 	var pepperSymbol = "";
 	if(userSymbol != "X")
@@ -52,9 +57,9 @@ function showWinner(value){
 
 function startSubscribe() {
 	session.service("ALMemory").done(function (ALMemory) {
-		ALMemory.subscriber("TicTacToe/UserSymbol").done(function(subscriber) {
-			subscriber.signal.connect(assignSymbol);
-		});
+		// ALMemory.subscriber("TicTacToe/UserSymbol").done(function(subscriber) {
+		// 	subscriber.signal.connect(assignSymbol);
+		// });
 		ALMemory.subscriber("TicTacToe/PepperPlot").done(function(subscriber) {
 			subscriber.signal.connect(pepperPlot);
 		});

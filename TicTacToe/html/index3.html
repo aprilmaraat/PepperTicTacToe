@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Tic Tac Toe</title>
-
+  <script src="/libs/qimessaging/1.0/qimessaging.js"></script>
+  <script src="scripts/function.js"></script>
   <!-- css -->
   <style>
      body{ 
@@ -45,11 +46,11 @@
      }
   </style>
 </head>
-<body>
+<body onLoad="startSubscribe();">
   <div id="question">Choose Symbol</div >
   <div id="button">
-    <div id="option_x" class="btn"><img src="X.png"/></div>
-    <div id="option_o" class="btn"><img src="O.png"/></div>
+    <div id="option_x" class="btn" onclick="assignSymbol('X')"><img src="images/X.png"/></div>
+    <div id="option_o" class="btn" onclick="assignSymbol('O')"><img src="images/O.png"/></div>
   </div>
 </body>
 </html>
