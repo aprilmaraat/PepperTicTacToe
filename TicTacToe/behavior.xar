@@ -14,7 +14,10 @@
         <Input name="TicTacToe/UserFinishTurn" type="0" type_size="1" nature="4" stm_value_name="TicTacToe/UserFinishTurn" inner="1" tooltip="TicTacToe/UserFinishTurn desc" id="5" />
         <Input name="TicTacToe/PepperPlot" type="0" type_size="1" nature="4" stm_value_name="TicTacToe/PepperPlot" inner="1" tooltip="TicTacToe/PepperPlot desc" id="6" />
         <Input name="TicTacToe/Winner" type="0" type_size="1" nature="4" stm_value_name="TicTacToe/Winner" inner="1" tooltip="TicTacToe/Winner desc" id="7" />
-        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="8" />
+        <Input name="TicTacToe/startGame" type="0" type_size="1" nature="4" stm_value_name="TicTacToe/startGame" inner="1" tooltip="TicTacToe/startGame desc" id="8" />
+        <Input name="TicTacToe/exit" type="0" type_size="1" nature="4" stm_value_name="TicTacToe/exit" inner="1" tooltip="TicTacToe/exit desc" id="9" />
+        <Input name="EngagementZones/PersonEnteredZone1" type="0" type_size="1" nature="4" stm_value_name="EngagementZones/PersonEnteredZone1" inner="1" tooltip="EngagementZones/PersonEnteredZone1 desc" id="10" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="11" />
         <Timeline enable="0">
             <BehaviorLayer name="behavior_layer1">
                 <BehaviorKeyframe name="keyframe1" index="1">
@@ -57,7 +60,7 @@
                             <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
                             <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
                         </Box>
-                        <Box name="Pass User Symbol" id="1" localization="8" tooltip="" x="230" y="11">
+                        <Box name="Pass User Symbol" id="1" localization="8" tooltip="" x="370" y="300">
                             <bitmap>media/images/box/box-python-script.png</bitmap>
                             <script language="4">
                                 <content>
@@ -202,7 +205,7 @@
                             <Output name="Start" type="1" type_size="1" nature="2" inner="0" tooltip="" id="6" />
                             <Output name="End" type="1" type_size="1" nature="1" inner="0" tooltip="" id="7" />
                         </Box>
-                        <Box name="Show Web (1)" id="5" localization="8" tooltip="" x="91" y="150">
+                        <Box name="Show Web (1)" id="5" localization="8" tooltip="" x="108" y="251">
                             <bitmap>media/images/box/box-python-script.png</bitmap>
                             <script language="4">
                                 <content>
@@ -229,6 +232,8 @@
                         <Link inputowner="8" indexofinput="2" outputowner="4" indexofoutput="5" />
                         <Link inputowner="8" indexofinput="2" outputowner="4" indexofoutput="6" />
                         <Link inputowner="3" indexofinput="2" outputowner="8" indexofoutput="3" />
+                        <Link inputowner="4" indexofinput="2" outputowner="0" indexofoutput="4" />
+                        <Link inputowner="5" indexofinput="2" outputowner="0" indexofoutput="10" />
                     </Diagram>
                 </BehaviorKeyframe>
             </BehaviorLayer>

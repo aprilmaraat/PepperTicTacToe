@@ -14,9 +14,16 @@
         <File name="function" src="html/scripts/function.js" />
         <File name="jquery-1.9.1" src="html/scripts/jquery-1.9.1.js" />
         <File name="jquery.blockUI" src="html/scripts/jquery.blockUI.js" />
+        <File name="Avenir" src="html/Avenir.ttc" />
+        <File name="ContinueOrExit" src="html/ContinueOrExit.html" />
+        <File name="index2" src="html/index2.html" />
+        <File name="index3" src="html/index3.html" />
+        <File name="winner" src="html/winner.html" />
     </Resources>
     <Topics />
     <IgnoredPaths>
+        <Path src="html/scripts/.DS_Store" />
+        <Path src="html/.DS_Store" />
         <Path src=".DS_Store" />
     </IgnoredPaths>
 </Package>

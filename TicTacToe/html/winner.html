@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- title and meta -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale = 1.335, minimum-scale = 1.335, maximum-scale = 1.335" />
+  <script src="/libs/qimessaging/1.0/qimessaging.js"></script>
+  <script src="main.js"></script>
+  <title>Tic Tac Toe</title>
+
+  <!-- css -->
+  <style>
+     body{ 
+      width: 100%;
+      height: 100%;
+      background-color: #FFFFB2;
+      font-family: avenir;
+     }
+     #header{
+      width: 90%;
+      height:40%;
+      margin:50px auto;
+      font-size: 120px;
+      text-align: center;  
+     }
+     #content{
+      width: 90%;
+      height: 60%;
+      margin:50px auto;
+      text-align: center;
+      font-size: 350px;
+      color:#487396;
+      background-color: #B2FFB2;
+     }
+  </style>
+</head>
+<body onLoad="startSubscribe();">
+  <div id="header">WINNER!!</div >
+  <div id="content"></div>
+</body>
+</html>

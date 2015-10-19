@@ -2,12 +2,31 @@ var session = new QiSession();
 var userSymbol = "Symbol not set.";
 
 $(document).ready(function(){
-	Load(true);
+	//Load(true);
 }); // end $(document).ready(function(){
 
 function assignSymbol(value){
 	userSymbol = value;
-	Load(false);
+
+	//----Junry----Send signal to the choregraphe of the user symbol choose---//
+	session.service("ALMemory").done(function (ALMemory) {
+		ALMemory.raiseEvent("TicTacToe/UserSymbol", userSymbol);
+	});
+	//---Junry---end-------//
+
+	//Load(false);
+}
+//----Junry----Function that start the Game---//
+function startGame(){
+	session.service("ALMemory").done(function (ALMemory) {
+		ALMemory.raiseEvent("TicTacToe/startGame", userSymbol);
+	});
+}
+//----Junry----Function that exit the Game---//
+function exit(){
+	session.service("ALMemory").done(function (ALMemory) {
+		ALMemory.raiseEvent("TicTacToe/exit", userSymbol);
+	});
 }
 
 function pepperPlot(value){
